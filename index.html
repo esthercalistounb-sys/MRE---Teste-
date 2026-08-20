@@ -3,625 +3,452 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo de Sistemas — Consulta Institucional</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Guia Rápido de Solicitações</title>
 <style>
-  :root {
-    --azul-noite: #071D41;
-    --azul-petroleo: #0B2C5C;
-    --azul-selo: #1351B4;
-    --azul-claro: #2670E8;
-    --verde-esperanca: #0F7A2E;
-    --amarelo-ouro: #FFCD07;
-    --bg: #F4F5F7;
-    --papel: #FFFFFF;
-    --ink: #14202E;
-    --ink-soft: #47566B;
-    --muted: #7A8798;
-    --line: #DEE3E9;
-    --line-forte: #B8C2D0;
+  :root{
+    --azul:#0F6CBD;      /* GIS */
+    --laranja:#D97706;   /* e-mail */
+    --verde:#107C41;     /* Forms / SharePoint */
+    --cinza-borda:#E1E4E8;
+    --cinza-linha:#F6F8FA;
+    --texto:#212529;
+    --cabecalho:#1B3A5B; /* azul institucional */
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Public Sans', Arial, sans-serif;
-    padding: 0 0 4rem;
-    min-height: 100vh;
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:var(--texto);
+    margin:0;
+    padding:24px;
+    background:#fff;
   }
+  .titulo{
+    font-size:22px;
+    font-weight:700;
+    color:var(--cabecalho);
+    margin:0 0 4px 0;
+  }
+  .subtitulo{
+    font-size:14px;
+    color:#5c6670;
+    margin:0 0 20px 0;
+  }
+  .tabela-wrap{
+    overflow-x:auto;
+    border:1px solid var(--cinza-borda);
+    border-radius:10px;
+    box-shadow:0 1px 4px rgba(0,0,0,.06);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:760px;
+    font-size:13.5px;
+  }
+  thead th{
+    background:var(--cabecalho);
+    color:#fff;
+    text-align:left;
+    font-weight:600;
+    padding:12px 14px;
+    position:sticky;
+    top:0;
+    vertical-align:middle;
+  }
+  tbody td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--cinza-borda);
+    vertical-align:top;
+    line-height:1.5;
+  }
+  tbody tr:nth-child(even){background:var(--cinza-linha);}
+  tbody tr:hover{background:#EAF3FB;}
+  .servico{font-weight:600;color:var(--cabecalho);}
+  /* Selo de unidade responsável */
+  .unidade{
+    display:inline-block;
+    background:#EEF2F6;
+    color:#334155;
+    font-weight:600;
+    font-size:12px;
+    padding:3px 10px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  /* Etiqueta de canal com cor */
+  .canal{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-weight:600;
+    font-size:12.5px;
+    padding:4px 11px;
+    border-radius:6px;
+    white-space:nowrap;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .gis   {background:rgba(15,108,189,.12); color:var(--azul);}
+  .gis   .dot{background:var(--azul);}
+  .email {background:rgba(217,119,6,.12); color:var(--laranja);}
+  .email .dot{background:var(--laranja);}
+  .forms {background:rgba(16,124,65,.12); color:var(--verde);}
+  .forms .dot{background:var(--verde);}
+  .passo{color:#37424c;}
+  .passo a{color:var(--azul);text-decoration:none;word-break:break-word;}
+  .passo a:hover{text-decoration:underline;}
+  .seta{color:#8a97a3;font-weight:700;padding:0 2px;}
+  .legenda{
+    margin-top:14px;
+    font-size:12.5px;
+    color:#5c6670;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .legenda span{display:inline-flex;align-items:center;gap:6px;}
 
-  /* ---- faixa tricolor com estrelas sutis ---- */
-  .tricolor {
-    height: 6px;
-    background: linear-gradient(90deg,
-      var(--verde-esperanca) 0 33.333%,
-      var(--amarelo-ouro) 33.333% 66.666%,
-      var(--azul-selo) 66.666% 100%);
+  /* Cabeçalho com botão */
+  .topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
   }
+  .btn-add{
+    background:var(--cabecalho);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .btn-add:hover{background:#132c47;}
 
-  /* ---- barra institucional ---- */
-  .topbar {
-    background: var(--azul-noite);
-    color: #fff;
-    padding: 0.85rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+  /* Modal */
+  .overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.5);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
   }
-  .topbar-inner {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+  .overlay.aberto{display:flex;}
+  .modal{
+    background:#fff;
+    border-radius:12px;
+    width:100%;
+    max-width:560px;
+    max-height:90vh;
+    overflow-y:auto;
+    padding:26px 28px 22px;
+    box-shadow:0 12px 32px rgba(0,0,0,.22);
   }
-  .selo {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--amarelo-ouro), #E8B800 72%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.18);
+  .modal h2{
+    margin:0 0 4px 0;
+    font-size:18px;
+    color:var(--cabecalho);
   }
-  .selo svg { width: 18px; height: 18px; color: var(--azul-noite); }
-  .topbar-text { font-size: 12.5px; letter-spacing: 0.03em; line-height: 1.35; }
-  .topbar-text strong {
-    font-family: 'Source Serif 4', serif;
-    font-weight: 600;
-    font-size: 14.5px;
-    letter-spacing: 0.01em;
-    display: block;
+  .modal p.desc{
+    margin:0 0 18px 0;
+    font-size:13px;
+    color:#5c6670;
   }
-  .topbar-text span { display: block; color: #A9BEDD; font-size: 11px; margin-top: 1px; }
-  .topbar-tag {
-    margin-left: auto;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    color: #A9BEDD;
-    border: 1px solid rgba(169,190,221,0.4);
-    padding: 0.25rem 0.55rem;
-    border-radius: 3px;
-    white-space: nowrap;
+  .campo{margin-bottom:14px;}
+  .campo label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--texto);
+    margin-bottom:5px;
   }
-
-  .wrap { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-
-  /* ---- cabeçalho / hero ---- */
-  header.hero {
-    position: relative;
-    background: linear-gradient(160deg, var(--azul-petroleo) 0%, var(--azul-selo) 130%);
-    color: #fff;
-    padding: 2.5rem 1.5rem 2.75rem;
-    overflow: hidden;
+  .campo input[type="text"],
+  .campo input[type="url"],
+  .campo select,
+  .campo textarea{
+    width:100%;
+    padding:9px 11px;
+    border:1px solid var(--cinza-borda);
+    border-radius:7px;
+    font-size:13.5px;
+    font-family:inherit;
+    color:var(--texto);
   }
-  header.hero .stars {
-    position: absolute;
-    inset: 0;
-    opacity: 0.14;
-    pointer-events: none;
+  .campo textarea{resize:vertical;min-height:64px;}
+  .campo input:focus,
+  .campo select:focus,
+  .campo textarea:focus{
+    outline:2px solid rgba(15,108,189,.3);
+    border-color:var(--azul);
   }
-  .hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-  .breadcrumb {
-    font-size: 11.5px;
-    letter-spacing: 0.04em;
-    color: #AFCBFA;
-    margin: 0 0 0.85rem;
-    font-family: 'IBM Plex Mono', monospace;
-    text-transform: uppercase;
+  .campo-linha{
+    display:flex;
+    gap:12px;
   }
-  h1 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0 0 0.55rem;
-    letter-spacing: -0.01em;
+  .campo-linha .campo{flex:1;}
+  .campo small{
+    display:block;
+    font-size:11.5px;
+    color:#8a97a3;
+    margin-top:4px;
   }
-  .sub {
-    color: #D6E3F8;
-    font-size: 0.98rem;
-    margin: 0;
-    max-width: 48ch;
-    line-height: 1.6;
+  .modal-acoes{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
   }
-  .hero-rule {
-    margin-top: 1.4rem;
-    height: 3px;
-    width: 56px;
-    background: var(--amarelo-ouro);
+  .btn-secundario{
+    background:#EEF2F6;
+    color:#334155;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
   }
-
-  /* ---- painel de busca ---- */
-  .search-panel {
-    background: transparent;
-    margin: -1.75rem auto 0;
-    max-width: 800px;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 2;
+  .btn-secundario:hover{background:#E1E7EE;}
+  .btn-primario{
+    background:var(--cabecalho);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
   }
-  .search-card {
-    background: var(--papel);
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--azul-selo);
-    box-shadow: 0 8px 24px rgba(7,29,65,0.12);
-    padding: 1.35rem 1.4rem 1.2rem;
+  .btn-primario:hover{background:#132c47;}
+  .sem-dados{
+    text-align:center;
+    color:#8a97a3;
+    padding:24px !important;
+    font-style:italic;
   }
-  .search-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 0 0 0.6rem;
-  }
-  .search-row {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    border: 1.5px solid var(--line-forte);
-    background: var(--bg);
-    padding: 0.68rem 0.9rem;
-  }
-  .search-row:focus-within { border-color: var(--azul-selo); }
-  .search-row svg { flex-shrink: 0; color: var(--azul-selo); width: 18px; height: 18px; }
-  #search {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: 'Public Sans', sans-serif;
-    font-size: 0.96rem;
-    color: var(--ink);
-  }
-  #search::placeholder { color: var(--muted); }
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  .chip {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    padding: 0.38rem 0.8rem;
-    border-radius: 2px;
-    border: 1px solid var(--line-forte);
-    background: var(--papel);
-    color: var(--ink-soft);
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
-  }
-  .chip:hover { border-color: var(--azul-selo); color: var(--azul-selo); }
-  .chip.active {
-    background: var(--azul-selo);
-    border-color: var(--azul-selo);
-    color: #fff;
-  }
-
-  main { padding-top: 1.75rem; }
-
-  .count-line {
-    font-size: 12px;
-    color: var(--muted);
-    margin: 0 0 1.1rem;
-    font-weight: 500;
-    font-family: 'IBM Plex Mono', monospace;
-    letter-spacing: 0.01em;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .count-line::before {
-    content: "";
-    display: inline-block;
-    width: 5px; height: 5px;
-    background: var(--verde-esperanca);
-    border-radius: 50%;
-  }
-
-  .cards { display: flex; flex-direction: column; gap: 0.9rem; }
-  .card {
-    position: relative;
-    background: var(--papel);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--verde-esperanca);
-    padding: 1.1rem 1.25rem;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    transition: box-shadow 0.12s ease, border-left-color 0.12s ease;
-  }
-  .card:hover {
-    box-shadow: 0 3px 14px rgba(7,29,65,0.08);
-    border-left-color: var(--azul-selo);
-  }
-  .card-body { flex: 1; min-width: 0; }
-  .card-top {
-    display: flex;
-    align-items: baseline;
-    gap: 0.7rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.5rem;
-  }
-  .sessao-badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--azul-selo);
-    background: #EAF1FC;
-    border: 1px solid #CBDEF7;
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-  }
-  .sistema-nome {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.08rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .descricao {
-    color: var(--ink-soft);
-    font-size: 0.93rem;
-    line-height: 1.6;
-    margin: 0;
-    padding-left: 0.05rem;
-    border-left: 2px solid var(--line);
-    padding-left: 0.65rem;
-  }
-
-  .empty {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--muted);
-    background: var(--papel);
-    border: 1px dashed var(--line-forte);
-  }
-  .empty svg { width: 32px; height: 32px; color: var(--muted); margin-bottom: 0.75rem; }
-  .empty p { margin: 0; font-size: 0.95rem; }
-
-  .add-toggle {
-    margin-top: 2.25rem;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    background: var(--papel);
-    border: 1px solid var(--azul-selo);
-    color: var(--azul-selo);
-    padding: 0.7rem 1rem;
-    border-radius: 3px;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-  }
-  .add-toggle svg { width: 15px; height: 15px; }
-  .add-toggle:hover { background: #EAF1FC; }
-
-  .add-form {
-    display: none;
-    margin-top: 0.75rem;
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--azul-selo);
-    background: var(--papel);
-    padding: 1.35rem;
-  }
-  .add-form.open { display: block; }
-  .add-form-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 1rem;
-    color: var(--azul-noite);
-  }
-  .field { margin-bottom: 0.9rem; }
-  .field label {
-    display: block;
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--ink-soft);
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-  }
-  .field input, .field textarea {
-    width: 100%;
-    border: 1px solid var(--line-forte);
-    background: var(--bg);
-    padding: 0.6rem 0.75rem;
-    font-family: 'Public Sans', sans-serif;
-    font-size: 0.95rem;
-    color: var(--ink);
-    outline: none;
-    border-radius: 2px;
-  }
-  .field input:focus, .field textarea:focus { border-color: var(--azul-selo); background: var(--papel); }
-  .field textarea { resize: vertical; min-height: 3.4rem; }
-  .form-actions { display: flex; gap: 0.7rem; align-items: center; }
-  .save-btn {
-    font-size: 13px;
-    font-weight: 600;
-    background: var(--azul-selo);
-    color: #fff;
-    border: none;
-    padding: 0.62rem 1.25rem;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  .save-btn:hover { background: var(--azul-claro); }
-  .cancel-btn {
-    font-size: 13px;
-    font-weight: 600;
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-  }
-  .form-note {
-    font-size: 11.5px;
-    color: var(--muted);
-    margin-top: 1rem;
-    line-height: 1.55;
-    border-top: 1px solid var(--line);
-    padding-top: 0.85rem;
-  }
-
-  footer {
-    max-width: 800px;
-    margin: 3rem auto 0;
-    padding: 1.4rem 1.5rem 0;
-    border-top: 3px solid var(--azul-selo);
-    font-size: 11.5px;
-    color: var(--muted);
-  }
-  .footer-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .footer-brand {
-    font-family: 'Source Serif 4', serif;
-    color: var(--ink-soft);
-    font-size: 12.5px;
-    font-weight: 600;
-  }
-  .footer-brand span { display: block; font-family: 'Public Sans', sans-serif; font-weight: 400; color: var(--muted); font-size: 11px; margin-top: 2px; }
-  .footer-tricolor { display: flex; gap: 3px; margin-top: 0.85rem; }
-  .footer-tricolor i { width: 16px; height: 4px; display: block; }
-  .footer-tricolor i:nth-child(1) { background: var(--verde-esperanca); }
-  .footer-tricolor i:nth-child(2) { background: var(--amarelo-ouro); }
-  .footer-tricolor i:nth-child(3) { background: var(--azul-selo); }
 </style>
 </head>
 <body>
-<div class="tricolor"></div>
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="selo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 9 4.6-.3 8-4 8-9V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+
+  <div class="topo">
+    <div>
+      <h1 class="titulo">Guia Rápido de Solicitações</h1>
+      <p class="subtitulo">Encontre o serviço, a unidade responsável e o passo a passo para abrir sua solicitação.</p>
     </div>
-    <div class="topbar-text">
-      <strong>Catálogo Interno de Sistemas</strong>
-      <span>Consulta institucional de referência</span>
-    </div>
-    <div class="topbar-tag">USO INTERNO</div>
+    <button class="btn-add" onclick="abrirModal()">➕ Adicionar solicitação</button>
   </div>
-</div>
 
-<header class="hero">
-  <svg class="stars" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#FFCD07">
-      <path d="M690 30 l4 10 10 1 -7.5 7 2 10 -8.5 -5.5 -8.5 5.5 2 -10 -7.5 -7 10 -1z"/>
-      <path d="M745 90 l3 7 7 1 -5 5 1.5 7 -6.5 -4 -6.5 4 1.5 -7 -5 -5 7 -1z"/>
-      <path d="M640 130 l3 7 7 0.7 -5 5 1.3 7 -6.3 -3.7 -6.3 3.7 1.3 -7 -5 -5 7 -0.7z"/>
-      <path d="M60 45 l3.5 8 8 0.8 -6 5.6 1.6 8 -7.1 -4.6 -7.1 4.6 1.6 -8 -6 -5.6 8 -0.8z"/>
-      <path d="M110 150 l3 7 7 0.7 -5 5 1.3 7 -6.3 -3.7 -6.3 3.7 1.3 -7 -5 -5 7 -0.7z"/>
-      <path d="M35 110 l2.5 6 6 0.6 -4.3 4.3 1.1 6 -5.3 -3.1 -5.3 3.1 1.1 -6 -4.3 -4.3 6 -0.6z"/>
-    </g>
-  </svg>
-  <div class="hero-inner">
-    <p class="breadcrumb">Início / Consulta / Sistemas cadastrados</p>
-    <h1>Catálogo de Sistemas</h1>
-    <p class="sub">Consulte qual sistema utilizar por sessão responsável ou finalidade de uso.</p>
-    <div class="hero-rule"></div>
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:16%">O que você precisa fazer?</th>
+          <th style="width:11%">Unidade responsável</th>
+          <th style="width:15%">Como solicitar?</th>
+          <th style="width:13%">Sistema / canal</th>
+          <th style="width:45%">Passo a passo rápido</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela">
+        <tr>
+          <td class="servico">Solicitar férias no Brasil</td>
+          <td><span class="unidade">DP</span></td>
+          <td>Preencher formulário eletrônico</td>
+          <td><span class="canal gis"><span class="dot"></span>GIS</span></td>
+          <td class="passo">Acessar o GIS <span class="seta">→</span> Minhas solicitações <span class="seta">→</span> Nova solicitação <span class="seta">→</span> tipo <b>DP</b> <span class="seta">→</span> tipo de solicitação <b>Férias Brasil</b> <span class="seta">→</span> baixar e preencher formulário</td>
+        </tr>
+        <tr>
+          <td class="servico">Solicitar licença nojo</td>
+          <td><span class="unidade">DP</span></td>
+          <td>Preencher formulário eletrônico</td>
+          <td><span class="canal gis"><span class="dot"></span>GIS</span></td>
+          <td class="passo">Acessar o GIS <span class="seta">→</span> Minhas solicitações <span class="seta">→</span> Nova solicitação <span class="seta">→</span> tipo <b>DP</b> <span class="seta">→</span> tipo de solicitação <b>Licença nojo</b> <span class="seta">→</span> preencher o campo e enviar</td>
+        </tr>
+        <tr>
+          <td class="servico">Solicitar aposentadoria</td>
+          <td><span class="unidade">DPAG</span></td>
+          <td>Preencher a partir das informações do GIS</td>
+          <td><span class="canal gis"><span class="dot"></span>GIS</span></td>
+          <td class="passo">Acessar o GIS <span class="seta">→</span> Minhas solicitações <span class="seta">→</span> Nova solicitação <span class="seta">→</span> tipo <b>DPAG</b> <span class="seta">→</span> tipo de solicitação <b>Pedido de aposentadoria</b> <span class="seta">→</span> seguir instruções</td>
+        </tr>
+        <tr>
+          <td class="servico">Solicitar passagens aéreas por vinda periódica</td>
+          <td><span class="unidade">DPAG</span></td>
+          <td>Preencher formulário eletrônico</td>
+          <td><span class="canal gis"><span class="dot"></span>GIS</span></td>
+          <td class="passo">Acessar o GIS <span class="seta">→</span> Minhas solicitações <span class="seta">→</span> Nova solicitação <span class="seta">→</span> tipo <b>DPAG</b> <span class="seta">→</span> tipo de solicitação <b>Requerimento de Passagens Aéreas para Vinda Periódica</b></td>
+        </tr>
+        <tr>
+          <td class="servico">Solicitar licença capacitação</td>
+          <td><span class="unidade">DTA</span></td>
+          <td>Enviar e-mail para <a href="mailto:dta@itamaraty.gov.br">dta@itamaraty.gov.br</a></td>
+          <td><span class="canal email"><span class="dot"></span>E-mail</span></td>
+          <td class="passo">Mais informações na página da DTA no SharePoint: <a href="https://mregovbr.sharepoint.com/sites/DTA/SitePages/Licen%c3%a7a-capacita%c3%a7%c3%a3o.aspx">Licença capacitação – DTA</a></td>
+        </tr>
+        <tr>
+          <td class="servico">Inscrever-se no CHSE</td>
+          <td><span class="unidade">DTA</span></td>
+          <td>Preencher formulário</td>
+          <td><span class="canal forms"><span class="dot"></span>Forms / SharePoint</span></td>
+          <td class="passo">Mais informações na página da DTA no SharePoint: <a href="https://mregovbr.sharepoint.com/sites/DTA/SitePages/CHSE.aspx">CHSE – DTA</a></td>
+        </tr>
+        <tr>
+          <td class="servico">Solicitar Credenciamento de Segurança para Acesso a Informações Classificadas</td>
+          <td><span class="unidade">DTIC</span></td>
+          <td>Preencher formulário</td>
+          <td><span class="canal forms"><span class="dot"></span>SharePoint</span></td>
+          <td class="passo">Acessar a página no SharePoint: <a href="https://mregovbr.sharepoint.com/sites/PortalDTIC/SitePages/Credenciamento.aspx">Credenciamento – DTIC</a> <span class="seta">→</span> seguir as instruções</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</header>
 
-<div class="search-panel">
-  <div class="search-card">
-    <p class="search-label">Pesquisar no catálogo</p>
-    <div class="search-row">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input id="search" type="text" placeholder="Buscar por sessão, sistema ou finalidade de uso">
-    </div>
-    <div class="chips" id="chips"></div>
+  <div class="legenda">
+    <span><span class="dot" style="background:var(--azul)"></span> GIS</span>
+    <span><span class="dot" style="background:var(--laranja)"></span> E-mail</span>
+    <span><span class="dot" style="background:var(--verde)"></span> Forms / SharePoint</span>
   </div>
-</div>
 
-<div class="wrap">
-  <main>
-    <p class="count-line" id="countLine"></p>
-    <div class="cards" id="cards"></div>
-    <div class="empty" id="emptyState" style="display:none;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <p>Nenhum sistema encontrado. Tente outro termo ou limpe o filtro.</p>
+  <!-- Modal para adicionar nova solicitação -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <h2>Adicionar nova solicitação</h2>
+      <p class="desc">Preencha os campos abaixo para incluir uma nova linha na tabela.</p>
+
+      <form id="form-adicionar" onsubmit="adicionarLinha(event)">
+        <div class="campo">
+          <label for="f-servico">O que a pessoa precisa fazer?</label>
+          <input type="text" id="f-servico" placeholder="Ex.: Solicitar prorrogação de licença" required>
+        </div>
+
+        <div class="campo-linha">
+          <div class="campo">
+            <label for="f-unidade">Unidade responsável</label>
+            <input type="text" id="f-unidade" placeholder="Ex.: DP, DPAG, DTA..." required>
+          </div>
+          <div class="campo">
+            <label for="f-canal">Sistema / canal</label>
+            <select id="f-canal" required>
+              <option value="gis">GIS</option>
+              <option value="email">E-mail</option>
+              <option value="forms">Forms / SharePoint</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="f-como">Como solicitar?</label>
+          <input type="text" id="f-como" placeholder="Ex.: Preencher formulário eletrônico" required>
+        </div>
+
+        <div class="campo">
+          <label for="f-passo">Passo a passo rápido</label>
+          <textarea id="f-passo" placeholder="Ex.: Acessar o GIS &gt; Minhas solicitações &gt; Nova solicitação..." required></textarea>
+          <small>Dica: use "&gt;" para indicar as etapas em sequência.</small>
+        </div>
+
+        <div class="campo">
+          <label for="f-link">Link (opcional)</label>
+          <input type="url" id="f-link" placeholder="https://...">
+          <small>Se preenchido, será inserido ao final do passo a passo como um link clicável.</small>
+        </div>
+
+        <div class="modal-acoes">
+          <button type="button" class="btn-secundario" onclick="fecharModal()">Cancelar</button>
+          <button type="submit" class="btn-primario">Adicionar</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <button class="add-toggle" id="addToggle">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Registrar novo sistema no catálogo
-    </button>
-    <div class="add-form" id="addForm">
-      <p class="add-form-title">Novo registro</p>
-      <div class="field">
-        <label for="f-sessao">Sessão responsável</label>
-        <input id="f-sessao" type="text" placeholder="Ex.: SGAD">
-      </div>
-      <div class="field">
-        <label for="f-sistema">Sistema</label>
-        <input id="f-sistema" type="text" placeholder="Ex.: Sei">
-      </div>
-      <div class="field">
-        <label for="f-descricao">Finalidade de uso</label>
-        <textarea id="f-descricao" placeholder="Para que esse sistema é utilizado"></textarea>
-      </div>
-      <div class="form-actions">
-        <button class="save-btn" id="saveEntry">Salvar registro</button>
-        <button class="cancel-btn" id="cancelEntry">Cancelar</button>
-      </div>
-      <p class="form-note">Registros adicionados aqui ficam salvos e visíveis para qualquer pessoa que acessar este catálogo.</p>
-    </div>
-  </main>
+  <script>
+    const CANAL_INFO = {
+      gis:   { classe: 'gis',   texto: 'GIS' },
+      email: { classe: 'email', texto: 'E-mail' },
+      forms: { classe: 'forms', texto: 'Forms / SharePoint' }
+    };
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        Catálogo Interno de Sistemas
-        <span>Consulta de referência · uso interno</span>
-      </div>
-      <div class="footer-brand" style="text-align:right;">
-        Documento vivo, mantido pela equipe
-        <span>Atualizado por meio dos registros da comunidade</span>
-      </div>
-    </div>
-    <div class="footer-tricolor"><i></i><i></i><i></i></div>
-  </footer>
-</div>
+    function abrirModal(){
+      document.getElementById('overlay').classList.add('aberto');
+      document.getElementById('f-servico').focus();
+    }
 
-<script>
-const baseData = [
-  { sessao: "MGI", sistema: "Sei", descricao: "Usado para pesquisar receitas do estado" },
-  { sessao: "SGAD", sistema: "Diplopédia", descricao: "Usado para solicitar itens pessoais" },
-  { sessao: "SECC", sistema: "Formulários Google", descricao: "Usado para criar e sugerir ideias" }
-];
+    function fecharModal(){
+      document.getElementById('overlay').classList.remove('aberto');
+      document.getElementById('form-adicionar').reset();
+    }
 
-let extraData = [];
-let activeSessao = "todos";
-let searchTerm = "";
+    // Fecha o modal clicando fora dele
+    document.getElementById('overlay').addEventListener('click', function(e){
+      if(e.target === this) fecharModal();
+    });
 
-async function loadExtra() {
-  try {
-    const result = await window.storage.get('catalogo:extras', true);
-    extraData = result ? JSON.parse(result.value) : [];
-  } catch (e) {
-    extraData = [];
-  }
-  render();
-}
+    // Fecha o modal com a tecla Esc
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') fecharModal();
+    });
 
-async function saveExtra() {
-  try {
-    await window.storage.set('catalogo:extras', JSON.stringify(extraData), true);
-  } catch (e) {
-    console.error('Erro ao salvar', e);
-  }
-}
+    function escapeHTML(texto){
+      const div = document.createElement('div');
+      div.textContent = texto;
+      return div.innerHTML;
+    }
 
-function allData() {
-  return [...baseData, ...extraData];
-}
+    function adicionarLinha(event){
+      event.preventDefault();
 
-function renderChips() {
-  const sessoes = [...new Set(allData().map(d => d.sessao))];
-  const chipsEl = document.getElementById('chips');
-  chipsEl.innerHTML = '';
-  const todos = document.createElement('button');
-  todos.className = 'chip' + (activeSessao === 'todos' ? ' active' : '');
-  todos.textContent = 'Todos';
-  todos.onclick = () => { activeSessao = 'todos'; render(); };
-  chipsEl.appendChild(todos);
-  sessoes.forEach(s => {
-    const c = document.createElement('button');
-    c.className = 'chip' + (activeSessao === s ? ' active' : '');
-    c.textContent = s;
-    c.onclick = () => { activeSessao = s; render(); };
-    chipsEl.appendChild(c);
-  });
-}
+      const servico = document.getElementById('f-servico').value.trim();
+      const unidade = document.getElementById('f-unidade').value.trim();
+      const como    = document.getElementById('f-como').value.trim();
+      const canal   = document.getElementById('f-canal').value;
+      const passo   = document.getElementById('f-passo').value.trim();
+      const link    = document.getElementById('f-link').value.trim();
 
-function render() {
-  renderChips();
-  const term = searchTerm.trim().toLowerCase();
-  const filtered = allData().filter(d => {
-    const matchesSessao = activeSessao === 'todos' || d.sessao === activeSessao;
-    const matchesTerm = !term ||
-      d.sessao.toLowerCase().includes(term) ||
-      d.sistema.toLowerCase().includes(term) ||
-      d.descricao.toLowerCase().includes(term);
-    return matchesSessao && matchesTerm;
-  });
+      if(!servico || !unidade || !como || !passo) return;
 
-  document.getElementById('countLine').textContent =
-    filtered.length + ' de ' + allData().length + ' sistemas encontrados';
+      const info = CANAL_INFO[canal];
 
-  const cardsEl = document.getElementById('cards');
-  const emptyEl = document.getElementById('emptyState');
-  cardsEl.innerHTML = '';
+      // Monta o texto do passo a passo, convertendo ">" em setas estilizadas
+      let passoHTML = escapeHTML(passo).replace(/&gt;|>/g, '<span class="seta">→</span>');
 
-  if (filtered.length === 0) {
-    emptyEl.style.display = 'block';
-    return;
-  }
-  emptyEl.style.display = 'none';
+      if(link){
+        passoHTML += ` <span class="seta">→</span> <a href="${escapeHTML(link)}" target="_blank" rel="noopener">Acessar link</a>`;
+      }
 
-  filtered.forEach(d => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML =
-      '<div class="card-body">' +
-        '<div class="card-top">' +
-          '<span class="sessao-badge">' + escapeHtml(d.sessao) + '</span>' +
-          '<span class="sistema-nome">' + escapeHtml(d.sistema) + '</span>' +
-        '</div>' +
-        '<p class="descricao">' + escapeHtml(d.descricao) + '</p>' +
-      '</div>';
-    cardsEl.appendChild(card);
-  });
-}
+      const corpo = document.getElementById('corpo-tabela');
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
+      // Remove linha de "sem dados", se existir
+      const linhaVazia = document.getElementById('linha-vazia');
+      if(linhaVazia) linhaVazia.remove();
 
-document.getElementById('search').addEventListener('input', (e) => {
-  searchTerm = e.target.value;
-  render();
-});
+      const novaLinha = document.createElement('tr');
+      novaLinha.innerHTML = `
+        <td class="servico">${escapeHTML(servico)}</td>
+        <td><span class="unidade">${escapeHTML(unidade)}</span></td>
+        <td>${escapeHTML(como)}</td>
+        <td><span class="canal ${info.classe}"><span class="dot"></span>${info.texto}</span></td>
+        <td class="passo">${passoHTML}</td>
+      `;
 
-document.getElementById('addToggle').addEventListener('click', () => {
-  document.getElementById('addForm').classList.toggle('open');
-});
-document.getElementById('cancelEntry').addEventListener('click', () => {
-  document.getElementById('addForm').classList.remove('open');
-});
-document.getElementById('saveEntry').addEventListener('click', async () => {
-  const sessao = document.getElementById('f-sessao').value.trim();
-  const sistema = document.getElementById('f-sistema').value.trim();
-  const descricao = document.getElementById('f-descricao').value.trim();
-  if (!sessao || !sistema || !descricao) return;
-  extraData.push({ sessao: sessao.toUpperCase(), sistema, descricao });
-  await saveExtra();
-  document.getElementById('f-sessao').value = '';
-  document.getElementById('f-sistema').value = '';
-  document.getElementById('f-descricao').value = '';
-  document.getElementById('addForm').classList.remove('open');
-  render();
-});
+      corpo.appendChild(novaLinha);
+      fecharModal();
 
-loadExtra();
-</script>
+      // Rola até a nova linha para dar feedback visual
+      novaLinha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  </script>
+
 </body>
 </html>
